@@ -44,6 +44,7 @@ return static function (RouteBuilder $routes) {
     // you do not need to include the /admin prefix
     // or the Admin route element.
      $builder->connect('/', ['controller' => 'Users', 'action' => 'login']);
+     
 	 $builder->fallbacks(DashedRoute::class);
      });
 

@@ -1,0 +1,133 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\ProjectPlacedToBoardDetail[]|\Cake\Collection\CollectionInterface $projectPlacedToBoardDetails
+ */
+?>
+<div class="projectPlacedToBoardDetails index content">
+    <?= $this->Html->link(__('New Project Placed To Board Detail'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <h3><?= __('Project Placed To Board Details') ?></h3>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= $this->Paginator->sort('project_work_id') ?></th>
+                    <th><?= $this->Paginator->sort('project_work_subdetail_id') ?></th>
+                    <th><?= $this->Paginator->sort('placed_date') ?></th>
+                    <th><?= $this->Paginator->sort('is_active') ?></th>
+                    <th><?= $this->Paginator->sort('created_by') ?></th>
+                    <th><?= $this->Paginator->sort('created_date') ?></th>
+                    <th><?= $this->Paginator->sort('modified_by') ?></th>
+                    <th><?= $this->Paginator->sort('modified_date') ?></th>
+                    <th class="actions"><?= __('Actions') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($projectPlacedToBoardDetails as $projectPlacedToBoardDetail): ?>
+                <tr>
+                    <td><?= $this->Number->format($projectPlacedToBoardDetail->id) ?></td>
+                    <td><?= $projectPlacedToBoardDetail->has('project_work') ? $this->Html->link($projectPlacedToBoardDetail->project_work->id, ['controller' => 'ProjectWorks', 'action' => 'view', $projectPlacedToBoardDetail->project_work->id]) : '' ?></td>
+                    <td><?= $projectPlacedToBoardDetail->has('project_work_subdetail') ? $this->Html->link($projectPlacedToBoardDetail->project_work_subdetail->id, ['controller' => 'ProjectWorkSubdetails', 'action' => 'view', $projectPlacedToBoardDetail->project_work_subdetail->id]) : '' ?></td>
+                    <td><?= h($projectPlacedToBoardDetail->placed_date) ?></td>
+                    <td><?= $projectPlacedToBoardDetail->is_active === null ? '' : $this->Number->format($projectPlacedToBoardDetail->is_active) ?></td>
+                    <td><?= $projectPlacedToBoardDetail->created_by === null ? '' : $this->Number->format($projectPlacedToBoardDetail->created_by) ?></td>
+                    <td><?= h($projectPlacedToBoardDetail->created_date) ?></td>
+                    <td><?= $projectPlacedToBoardDetail->modified_by === null ? '' : $this->Number->format($projectPlacedToBoardDetail->modified_by) ?></td>
+                    <td><?= h($projectPlacedToBoardDetail->modified_date) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $projectPlacedToBoardDetail->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $projectPlacedToBoardDetail->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $projectPlacedToBoardDetail->id], ['confirm' => __('Are you sure you want to delete # {0}?', $projectPlacedToBoardDetail->id)]) ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="paginator">
+        <ul class="pagination">
+            <?= $this->Paginator->first('<< ' . __('first')) ?>
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->last(__('last') . ' >>') ?>
+        </ul>
+        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+    </div>
+</div>
+
+<style>
+    .mdl-tabs__tab.tabs_three:hover {
+        color: #6610f2 !important;
+    }
+
+    a.mdl-tabs__tab.tabs_three {
+        max-width: 20%;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card-box">
+            <div class="card-head">
+                <header>Project Placed To Board Details</header>				
+				<div class="tools">
+					  <?php echo $this->Html->link(__('Add Project Placed Board Details<i class="fa fa-plus"></i>'), ['action' => 'add'], ['escape' => false, 'class' => ' btn btn-info']); ?>
+				</div>
+            </div>
+            <div class="card-body ">
+                <div class="mdl-tabs mdl-js-tabs">
+                    <div class="mdl-tabs__panel is-active p-t-20">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card-body">
+                                   
+                                     <?php if ($projectPlacedToBoardDetails != '') {  ?>
+                                    <div class="table-scrollable">
+                                        <table class="table  table-bordered table-checkable order-column" style="width: 100%" id="example4">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th> Sno </th>
+                                                    <th> Name </th>
+                                                    <th> Actions </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $sno = 1;
+                                                    foreach ($projectPlacedToBoardDetails as $projectPlacedToBoardDetail) : ?>
+                                                    <tr class="odd gradeX">
+                                                        <td class="text-center"><?php echo $sno; ?></td>
+                                                        <td class="title"><?php echo $buildingMaterial['name'] ?></td>
+
+                                                        <td class="text-center">
+                                                            <div class="btn-icon tooltipster" title="Edit">
+                                                                <?php echo $this->Html->link(__('<span class="svg-icon svg-icon-primary"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo3/dist/../src/media/svg/icons/Communication/Write.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 24 24" version="1.1">
+																<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																	<rect x="0" y="0" width="24" height="24"/>
+																	<path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953) "/>
+																	<path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+																</g>
+															</svg><!--end::Svg Icon--></span>'), ['action' => 'edit', $buildingMaterial['id']], ['escape' => false]); ?>
+																		</div>
+                                               
+                                                        </td>
+                                                    </tr>
+                                                <?php $sno++;
+                                                    endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                
+                            <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(".btn-sweetalert").attr("onclick", "").unbind("click"); //remove function onclick button
+</script>
